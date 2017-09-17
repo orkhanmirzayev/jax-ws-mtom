@@ -48,8 +48,8 @@ public class Mtom {
         return one + second;
     }
 
-    @WebMethod(operationName = "uploadFile")
-    public int upload(@WebParam(name = "image") PictureInfo pictureInfo, @WebParam(name = "text") String text) throws IOException {
+    @WebMethod(operationName = "uploadFileWithDataHandler")
+    public int uploadDataHandler(@WebParam(name = "image") PictureInfo pictureInfo) throws IOException {
         DataHandler dh = pictureInfo.getImageData();
         try {
             File F = new File("C:\\Users\\orkhan.mirzayev\\Desktop\\" + pictureInfo.getName() + ".jpg");
@@ -61,6 +61,13 @@ public class Mtom {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return 0;
+
+    }
+    @WebMethod(operationName = "uploadFileWithImage")
+    public int uploadImage(@WebParam(name = "image") Image image, @WebParam(name = "text") String text) throws IOException {
+        BufferedImage bufferedImage = (BufferedImage) image;
+        ImageIO.write(bufferedImage, "jpg", new File("C:\\Users\\orkhan.mirzayev\\Desktop\\"+text+".jpg"));
         return 0;
 
     }
